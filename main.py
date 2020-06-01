@@ -1,7 +1,6 @@
 from time import sleep 
 from render_forca import render_forca
 
-
 game_loop = True
 erros = 0
 
