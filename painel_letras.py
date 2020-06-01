@@ -1,5 +1,6 @@
 from sortear_palavra import sortear_palavras
 from render_forca import render_forca
+from time import sleep
 
 sorteio = sortear_palavras()
 
@@ -14,71 +15,81 @@ letras_alfabeto = ['a', 'b', 'c',  'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 
 
 # print(f'palavra secreta: {palavra}') 
 
-def painel_letras(palavra_secreta):
-    erros = 0
-    while True:    
-        letras_painel = ''
-        i = 0
-        # resposta = ''
-        palavra_oculta.clear()
-        print(render_forca(erros))
+def painel_letras(palavra_secreta, erros):
+       
+    letras_painel = ''
+    palavra_oculta.clear()
+    resposta = ''
 
 
-        # ajustar painel de letras conforme letras restantes
-        selecione = True
-        letras_painel = ''
-        count = 0
-        for j in letras_alfabeto:
-            letras_painel += j
-            letras_painel += ' '
-            count += 1
-            if count % 5 == 0:
-                letras_painel += '\n'
 
-        # printar painel
-        print(f'\033[36m{letras_painel}\033[m')
+    # checar se letra escolhida coincide com palavra secreta
+    for l in palavra_secreta:
+        if l in arr_tentativas:
+            palavra_oculta.append(l)
+        else:
+            palavra_oculta.append('_')
 
-        # selecionar letra
-        while selecione:
-            tentativa = input('escolha uma letra: ')
-
-            # checar se letra é válida
-            if tentativa not in letras_alfabeto:
-                print('\033[31mopção inválida. Tente novamente\n\033[m')
-                break
-            else:
-                selecione = False
-
-            arr_tentativas.append(tentativa)
+    for l in palavra_oculta:
+        resposta += l + ' '
+    print(f'resposta: {resposta}')  
 
 
-        # checar se letra escolhida coincide com palavra secreta
-            for l in palavra_secreta:
-                if l in arr_tentativas:
-                    palavra_oculta.append(l)
-                else:
-                    palavra_oculta.append('_')
-            # print(f'palavra_oculta: {palavra_oculta}') 
+    # print(f'palavra_oculta: {palavra_oculta}')  
 
-            resposta = ''
-            for l in palavra_oculta:
-                resposta += l + ' '
-            print(f'resposta: {resposta}')    
+    # ajustar painel de letras conforme letras restantes
+    selecione = True
+    letras_painel = ''
+    count = 0
+    for j in letras_alfabeto:
+        letras_painel += j
+        letras_painel += ' '
+        count += 1
+        if count % 5 == 0:
+            letras_painel += '\n'
 
-            if tentativa in palavra_secreta:
-                print('acertou! \n')
-            else:
-                print(f'\033[31merrou!\n\033[m')  
-                erros += 1
+    # printar painel
+    print(f'\033[36m{letras_painel}\033[m')
+
+    # selecionar letra
+    while selecione:
+        tentativa = input('escolha uma letra: ')
+
+        # checar se letra é válida
+        if tentativa not in letras_alfabeto:
+            print('\033[31mopção inválida. Tente novamente\n\033[m')
+            break
+        else:
+            selecione = False
+
+        arr_tentativas.append(tentativa)
 
 
-            # remover letras já escolhidas do painel   
-            for l in letras_alfabeto:
-                if tentativa == l:
-                    letras_alfabeto.remove(tentativa)
-                                
+        if tentativa in palavra_secreta:
+            print('acertou! \n')
+            sleep(0.6)
+        else:
+            print(f'\033[31merrou!\n\033[m')  
+            erros += 1
+            sleep(0.6)
 
-painel_letras(palavra)
+
+
+        # remover letras já escolhidas do painel   
+        for l in letras_alfabeto:
+            if tentativa == l:
+                letras_alfabeto.remove(tentativa)
+
+        # print(f'erros: {erros}')    
+        # print(erros)
+    
+
+        return (erros) 
+           
+
+                                    
+
+# painel_letras(palavra)
 
 
 
