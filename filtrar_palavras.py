@@ -1,4 +1,4 @@
-
+# declaração global de variáveis
 palavra = []
 arr_letras = []
 arr_palavras = []
@@ -8,26 +8,29 @@ arr_dicas = []
 arr_dicas_letras = []
 
 
-def filtrar_palavras():    
+def filtrar_palavras(): 
+    # abrir arquivo .txt 
     banco = open('banco_palavras.txt','r')
-    linhas = banco.readlines()
-   
 
+    #armazenar linhas em uma lista
+    linhas = banco.readlines()
+    # print(linhas) 
+   
+    # armazenar letras de palavras 
     for linha in linhas:
-        # print(linha.rstrip())
         palavra.clear()
 
         for ch in linha:
-            if  ch == ' ' or  ch == ',' or ch == '\n':
+            # se encontrar vírgula, quebre o laço 
+            if ch == ',' :
                 break
             else:
                 palavra.append(ch)
 
         arr_letras.append(palavra.copy())
-        # print(arr_letras)
 
 
-
+    # armazenar letras de dicas 
     for linha in linhas:
         leitura = False
         dica.clear()
@@ -35,44 +38,53 @@ def filtrar_palavras():
         for ch in linha:
             if leitura == False:
                 pass
+            # se encontrar vírgula, comece a leitura
             if ch == ',':  
                 leitura = True
                 continue
-            
+                
+                # se encontrar \n quebre o laço
                 if ch == '\n':
                     leitura = False
                     break
             else:
+                # acrescente letras à dica
                 if leitura and ch != '\n':     
                     dica.append(ch)
                     
+        dica.pop(0) # <== remover espaço vazio na primeira posição da dica       
         arr_dicas_letras.append(dica.copy())
-        # print(dica) 
-
-    # print(arr_dicas_letras)
 
 
+    # agrupar letras em palavras e armazenar em arr_palavras
     for i in range(len(arr_letras)):
         palavra_filtrada = ''
         for ch in arr_letras[i]:
             palavra_filtrada += ch
 
-        # print(palavra_filtrada)
         arr_palavras.append(palavra_filtrada)
-    # print(arr_palavras)    
 
 
+
+    # agrupar letras das dicas e armazenar em arr_dicas
     for i in range(len(arr_dicas_letras)):
         palavra_filtrada = ''
         for ch in arr_dicas_letras[i]:
             palavra_filtrada += ch
 
-        # print(palavra_filtrada)
         arr_dicas.append(palavra_filtrada)
+
+
+    # descomentar as linhas abaixo para verificar palavras e dicas
+    # print(arr_palavras)    
     # print(arr_dicas) 
+
 
     return ([arr_palavras, arr_dicas])
 
-        
 
+   
+    # fechar arquivo de texto
     banco.close()
+
+# filtrar_palavras()    
