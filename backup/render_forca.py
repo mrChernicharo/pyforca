@@ -65,4 +65,6 @@ def render_forca(erros):
         print('|        ')
         print('|')
         print(' Lamento! Você Perdeu! ')
-    return    
+
+    return ''
+

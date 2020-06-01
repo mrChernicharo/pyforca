@@ -4,7 +4,7 @@ from sortear_palavra import sortear_palavras
 from painel_letras import painel_letras
 
 game_loop = True
-erros = 0
+erros = []
 
 sorteio = sortear_palavras()
 
@@ -28,15 +28,18 @@ sleep(1)
 # main_loop
 while game_loop:
     
-    erros += 1
-    render_forca(erros)
-    print('\n-------------')
-    print(painel_letras())
+    # erros += 1
+    render_forca(len(erros))
+    print('\n__________________________________________________')
+    
+    while len(erros) < 6:    
+        print(painel_letras(palavra_secreta))
+        break
 
 
     
     # game over
-    while erros > 6:
+    while len(erros) > 6:
         game_over = input('deseja jogar novamente? [s/n] ')    
 
         if game_over == 's':
