@@ -8,10 +8,11 @@ erros = 0
 
 sorteio = sortear_palavras()
 
-palavra = sorteio[0]
+palavra_secreta = sorteio[0]
 dica = sorteio[1]
 
 
+# início da partida
 print('Bem vindo ao jogo da forca!')
 sleep(1)
 print(f'Atenção à dica:')
@@ -29,8 +30,9 @@ while game_loop:
     
     erros += 1
     render_forca(erros)
-    input('aperte enter')
+    print('\n-------------')
     print(painel_letras())
+
 
     
     # game over
