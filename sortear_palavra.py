@@ -1,3 +1,7 @@
+"""
+Como descreve o nome, esse é o arquivo com a função responsável por sortear as palavras
+"""
+
 from filtrar_palavras import filtrar_palavras
 from random import randint
 

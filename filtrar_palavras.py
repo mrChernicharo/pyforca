@@ -1,3 +1,11 @@
+"""
+Esse é o arquivo responsável por 
+1. extraír as palavras e dicas do arquivo banco_palavras.txt
+2. filtrar linhas e espaços
+3. agrupar palavras e dicas em duas listas que serão usadas na hora de sortear as palavras
+"""
+
+
 # declaração global de variáveis
 palavra = []
 arr_letras = []
@@ -73,8 +81,8 @@ def filtrar_palavras():
 
         arr_dicas.append(palavra_filtrada)
 
-
-    # descomentar as linhas abaixo para verificar palavras e dicas
+    # Para testar e verificar palavras e dicas:
+    # 1. descomente os prints 
     # print(arr_palavras)    
     # print(arr_dicas) 
 
@@ -83,3 +91,5 @@ def filtrar_palavras():
     # fechar arquivo de texto
     banco.close()
 
+# 2. descomente a chamada da função
+# filtrar_palavras()

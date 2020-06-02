@@ -25,4 +25,4 @@ while ativo:
             checkout = False
             ativo = False
         else:
-            print('\033[31mNão entendi sua resposta. \033[m')
+            print('\033[31mNão entendi. \033[m')

@@ -6,8 +6,8 @@ from unicodedata import normalize
 
 # sortear e registrar palavra e dica
 sorteio = sortear_palavras()
-# palavra_secreta = sorteio[0]
-palavra_secreta = 'monções'
+palavra_secreta = sorteio[0]
+# palavra_secreta = 'monções'
 dica = sorteio[1]
 
 # variáveis globais
@@ -34,19 +34,36 @@ def exibirPlacar():
     print(f'derrotas: {derrotas}')
     sleep(0.6)
 
+def pontinho():
+    j = 14
+    for i in range(30):   
+        sleep(0.04)
+        if i < 14:
+            print('. ' * i)
+        if i >= 15:
+            print('. ' * (j))
+            j -= 1
 
+            
+
+
+# apresentação
 print('\033[32mSeja bem vindo ao PyForca!\033[m')
+sleep(1.2)
+print('Um game de\033[32m Felipe Chernicharo\033[m')
+pontinho()
 nome = input('Digite o seu nome ')
 print(f'\033[32mVamos nessa! {nome}\n\033[m')
 sleep(0.8)
 
-
+#loop principal
 while game:
 
+    # introdução da partida
     while inicio:
         erros = 0
-        print(f'Iniciando partida {partidas}!')
-        sleep(0.6)
+        print(f'\033[32mIniciando partida {partidas}!\n\033[m')
+        sleep(1)
         print(f'Atenção à dica:')
         sleep(0.6)
         print('')
@@ -61,6 +78,8 @@ while game:
     # imprimir forca
     if erros < 6:
         render_forca(erros)
+
+    # fluxo de derrota    
     if erros == 6:
         print('------------     ')
         print('|          |   ')
@@ -70,6 +89,7 @@ while game:
         print('|           ')
         print('|        ')
         print('|')
+        pontinho()
         print(f'\033[31mLamento {nome}! Você Perdeu! \033[m')
         sleep(1.2)
         print(f'A palavra screta é {palavra_secreta.upper()}')
@@ -84,6 +104,7 @@ while game:
         if erros < 6:
             print(f'resposta: {resposta}')  
 
+    # loop da partida
     while partida:
         
         letras_painel = ''
@@ -113,41 +134,25 @@ while game:
 
         # ajustes de acentuação
         for l in palavra_secreta:
-            aux = ''
-            if l == 'á' or l == 'ã' or l == 'â' or l == 'à':
-                aux = 'a'
-            if l == 'ç':
-                aux = 'c' 
-            if l == 'é' or l == 'ê':
-                aux = 'e'     
-            if l == 'ó' or l == 'ô' or l == 'õ':
-                aux = 'o' 
-            if l == 'í':
-                aux = 'i'  
                                
             # ajustar palavra oculta
-            if l in arr_tentativas:
+            if remover_acentos(l) in arr_tentativas:
                 palavra_oculta.append(l)
-            elif aux in arr_tentativas:
-                palavra_oculta.append(l) 
             else:
                 palavra_oculta.append('_')
             
         # ajustar resposta
         for l in palavra_oculta:
-            if aux:
-                resposta += aux + ' '
-
-            else:
-                resposta += l + ' '
+            resposta += l + ' '
 
 
-        # fluxo de acerto e erro
+        # fluxo de acerto, erro e vitória
         if remover_acentos(tentativa) in remover_acentos(palavra_secreta):
             print('\033[33macertou! \n\033[m')
 
 
             if not '_' in palavra_oculta:
+                pontinho()
                 print(f'\033[33mParabéns {nome}! Você venceu!!! \033[m\nA palavra secreta é {palavra_secreta.upper()}')
                 vitorias += 1
                 partida = False
@@ -190,7 +195,7 @@ while game:
                     
         elif game_over == 'n':
             game = False
-            print (f'Até logo {nome}!')    
+            print (f'\033[32mAté logo {nome}!\033[m')    
             break
         else:    
-            print ('opçao invalida.')    
+            print (f'\033[32mOps...Opçao invalida.\033[m')    
