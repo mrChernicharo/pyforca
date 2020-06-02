@@ -15,10 +15,10 @@ letras_alfabeto = ['a', 'b', 'c',  'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 
 
 # print(f'palavra secreta: {palavra}') 
 
-def painel_letras(palavra_secreta, erros):
-       
+def painel_letras(palavra_secreta, erros, new_game):
+
     letras_painel = ''
-    palavra_oculta.clear()
+    # palavra_oculta.clear()
     resposta = ''
 
 
@@ -35,7 +35,7 @@ def painel_letras(palavra_secreta, erros):
     print(f'resposta: {resposta}')  
 
 
-    # print(f'palavra_oculta: {palavra_oculta}')  
+
 
     # ajustar painel de letras conforme letras restantes
     selecione = True
@@ -80,9 +80,6 @@ def painel_letras(palavra_secreta, erros):
             if tentativa == l:
                 letras_alfabeto.remove(tentativa)
 
-        # print(f'erros: {erros}')    
-        # print(erros)
-    
 
         return (erros) 
            
