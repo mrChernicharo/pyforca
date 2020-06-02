@@ -1,5 +1,5 @@
 """
-Rode esse arquivo para inserir novas palavras no banco de palavras
+Rode esse arquivo para inserir novas palavras em banco_palavras.txt
 """
 ativo = True
 
