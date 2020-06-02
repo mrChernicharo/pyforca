@@ -1,9 +1,13 @@
 from time import sleep
 from sortear_palavra import sortear_palavras
+from render_forca import render_forca
+from unicodedata import normalize
+
 
 # sortear e registrar palavra e dica
 sorteio = sortear_palavras()
-palavra_secreta = sorteio[0]
+# palavra_secreta = sorteio[0]
+palavra_secreta = 'monções'
 dica = sorteio[1]
 
 # variáveis globais
@@ -20,6 +24,8 @@ letras_alfabeto = ['a', 'b', 'c',  'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 
 resposta = ''
 letras_painel = ''
 
+def remover_acentos(txt):
+    return normalize('NFKD', txt).encode('ASCII', 'ignore').decode('ASCII')
 
 def exibirPlacar():
     sleep(0.6)
@@ -29,8 +35,11 @@ def exibirPlacar():
     sleep(0.6)
 
 
-print('Seja bem vindo ao PyForca!')
+print('\033[32mSeja bem vindo ao PyForca!\033[m')
 nome = input('Digite o seu nome ')
+print(f'\033[32mVamos nessa! {nome}\n\033[m')
+sleep(0.8)
+
 
 while game:
 
@@ -41,8 +50,8 @@ while game:
         print(f'Atenção à dica:')
         sleep(0.6)
         print('')
-        print(f'A dica é: " {dica}" \n')
-        sleep(0.6)
+        print(f'A dica é: \033[35m" {dica.capitalize()}" \n\033[m')
+        sleep(1.2)
         print('preparado?')
         sleep(0.6)
         print('')
@@ -50,60 +59,8 @@ while game:
         inicio =  False
     
     # imprimir forca
-    if erros == 0:
-        print('------------     ')
-        print('|          |   ')
-        print('|             ')
-        print('|               ')
-        print('|                ')
-        print('|           ')
-        print('|         ')
-        print('|         ')
-    if erros == 1:
-        print('------------     ')
-        print('|          |   ')
-        print('|          0   ')
-        print('|               ')
-        print('|                ')
-        print('|           ')
-        print('|         ')
-        print('|         ')
-    if erros == 2:
-        print('------------     ')
-        print('|          |   ')
-        print('|          0   ')
-        print('|          |     ')
-        print('|                ')
-        print('|           ')
-        print('|         ')
-        print('|         ')
-    if erros == 3:
-        print('------------     ')
-        print('|          |   ')
-        print('|          0   ')
-        print('|         -|     ')
-        print('|                ')
-        print('|           ')
-        print('|         ')
-        print('|         ')
-    if erros == 4:
-        print('------------     ')
-        print('|          |   ')
-        print('|          0   ')
-        print('|         -|-     ')
-        print('|                ')
-        print('|           ')
-        print('|         ')
-        print('|         ')
-    if erros == 5:
-        print('------------     ')
-        print('|          |   ')
-        print('|          0   ')
-        print('|         -|-     ')
-        print('|         /      ')
-        print('|           ')
-        print('|         ')
-        print('|         ')
+    if erros < 6:
+        render_forca(erros)
     if erros == 6:
         print('------------     ')
         print('|          |   ')
@@ -113,8 +70,10 @@ while game:
         print('|           ')
         print('|        ')
         print('|')
-        print(f'Lamento {nome}! Você Perdeu! ')
+        print(f'\033[31mLamento {nome}! Você Perdeu! \033[m')
+        sleep(1.2)
         print(f'A palavra screta é {palavra_secreta.upper()}')
+        sleep(1.2)
         derrotas += 1
         partida = False
         exibirPlacar()
@@ -128,9 +87,13 @@ while game:
     while partida:
         
         letras_painel = ''
+        count = 1
         for l in letras_alfabeto:
-            letras_painel += l
-        print(letras_painel)  
+            letras_painel += l + ' '
+            if count % 6 == 0:
+                letras_painel += '\n'
+            count += 1    
+        print(f'\033[36m{letras_painel.upper()}\033[m')  
             
         tentativa = input('escolha uma letra: ')
         if tentativa not in letras_alfabeto:
@@ -180,14 +143,15 @@ while game:
 
 
         # fluxo de acerto e erro
-        if tentativa in palavra_secreta:
-            print('acertou! \n')
+        if remover_acentos(tentativa) in remover_acentos(palavra_secreta):
+            print('\033[33macertou! \n\033[m')
 
 
             if not '_' in palavra_oculta:
-                print(f'Parabéns {nome}! Você venceu!!! \nA palavra secreta é {palavra_secreta.upper()}')
+                print(f'\033[33mParabéns {nome}! Você venceu!!! \033[m\nA palavra secreta é {palavra_secreta.upper()}')
                 vitorias += 1
                 partida = False
+                sleep(0.8)
                 exibirPlacar()
                 break     
 
