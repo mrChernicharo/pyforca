@@ -1,3 +1,9 @@
+"""
+Arquivo principal
+
+É só rodar e se divertir jogando o PyForca!
+"""
+
 from time import sleep
 from sortear_palavra import sortear_palavras
 from render_forca import render_forca
@@ -52,7 +58,7 @@ print('\033[32mSeja bem vindo ao PyForca!\033[m')
 sleep(1.2)
 print('Um game de\033[32m Felipe Chernicharo\033[m')
 pontinho()
-nome = input('Digite o seu nome ')
+nome = input('Digite o seu nome ').capitalize()
 print(f'\033[32mVamos nessa! {nome}\n\033[m')
 sleep(0.8)
 
@@ -62,7 +68,7 @@ while game:
     # introdução da partida
     while inicio:
         erros = 0
-        print(f'\033[32mIniciando partida {partidas}!\n\033[m')
+        print(f'\033[32m\nIniciando partida {partidas}!\n\033[m')
         sleep(1)
         print(f'Atenção à dica:')
         sleep(0.6)
