@@ -35,8 +35,6 @@ def painel_letras(palavra_secreta, erros, new_game):
     print(f'resposta: {resposta}')  
 
 
-
-
     # ajustar painel de letras conforme letras restantes
     selecione = True
     letras_painel = ''

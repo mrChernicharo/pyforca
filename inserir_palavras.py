@@ -16,6 +16,7 @@ while ativo:
 
     checkout = True
     while checkout:
+        print('--------' * 10)
         resposta = input('Deseja inserir mais uma palavra? [s/n] ')
         if resposta == 's':
             checkout = False

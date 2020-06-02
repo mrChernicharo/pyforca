@@ -65,7 +65,6 @@ def filtrar_palavras():
         arr_palavras.append(palavra_filtrada)
 
 
-
     # agrupar letras das dicas e armazenar em arr_dicas
     for i in range(len(arr_dicas_letras)):
         palavra_filtrada = ''
@@ -79,12 +78,8 @@ def filtrar_palavras():
     # print(arr_palavras)    
     # print(arr_dicas) 
 
-
     return ([arr_palavras, arr_dicas])
 
-
-   
     # fechar arquivo de texto
     banco.close()
 
-# filtrar_palavras()    
